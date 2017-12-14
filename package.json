@@ -1,11 +1,24 @@
 {
   "name": "kad-broadcast",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Topology-based broadcast for kademlia",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo \"$(cat ./polyfill.js)\n$(cat src/index.js)\" > index.js && ./node_modules/.bin/babel src/ index.js --out-dir lib/ && rm index.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "kad": "^2.4.1",
+    "knuth-shuffle": "^1.0.8",
+    "lru-cache": "^4.1.1",
+    "uuid": "^3.1.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
+  }
 }
