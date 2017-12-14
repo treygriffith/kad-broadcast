@@ -11,13 +11,12 @@ class BroadcastPlugin {
    * @constructor
    * @param {KademliaNode} node
    */
-  constructor(node) {
-    const handlers = new BroadcastRules(this)
+  constructor(node, listener) {
+    const handlers = new BroadcastRules(this, listener)
     this.cached = new LruCache(constants.LRU_CACHE_SIZE)
     this.node = node
     this.broadcast = this.broadcast.bind(this)
     this.node.use(BroadcastPlugin.BROADCAST_METHOD, handlers.broadcast.bind(handlers))
-
   }
 
   broadcast(contents) {

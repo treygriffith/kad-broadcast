@@ -9,8 +9,9 @@ class BroadcastRules {
    * @constructor
    * @param {BroadcastPlugin} broadcaster - Instance of a initialized broadcast plugin
    */
-  constructor(broadcaster) {
+  constructor(broadcaster, listener) {
     this.broadcaster = broadcaster
+    this.listener = listener
   }
 
   async broadcast(request, response, next) {
@@ -21,6 +22,7 @@ class BroadcastRules {
     }
 
     this.broadcaster.cached.set(uuid, Date.now())
+    this.listener(contents)
     await this.broadcaster.broadcastToHeight(uuid, contents, height)
     response.send([])
   }
